@@ -61,7 +61,7 @@ var animate = function () {
 	}
 
 	var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-	current_word = new THREE.Mesh(mxs.pickRandomItem(words_geometry), material);
+	current_word = new THREE.Mesh(michek.pickRandomItem(words_geometry), material);
 
 	mixer = new THREE.AnimationMixer(current_word);
 	scene.add(current_word);

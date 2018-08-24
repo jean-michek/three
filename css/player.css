@@ -1,0 +1,25 @@
+/* CSS for the player */
+
+div#player-controls {
+    z-index: -2;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    background-color: #303030;
+}
+
+div#player-cursor {
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 0%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+div#player-icons {
+    font-size: 40px;
+    margin: 10px;
+    z-index: 0;
+    color: #C0C0C0;
+    cursor: cell;
+}
