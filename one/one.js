@@ -54,7 +54,7 @@ var word_clip = new THREE.AnimationClip('Action', 0.5, [word_animation_position,
 var animate = function () {
     requestAnimationFrame(animate);
 
-    // First time.
+    // Change word.
     if ((!current_action || !current_action.isRunning()) && words_geometry.length > 0) {
 	if (current_word) {
 	    scene.remove(current_word);
