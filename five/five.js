@@ -1,5 +1,12 @@
 // Five. Evolving scratches.
 
+// Settings to experiment w/.
+var kHackerMode = 1;
+var kLines = 15;
+var kVertices = 7;
+var kAnimationRotation = 2;
+var kAnimationPosition = 10;
+
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(
@@ -8,13 +15,13 @@ var camera = new THREE.PerspectiveCamera(
     0.1,					// near
     1000					// far
 );
-camera.position.set(0, 0, 100);
+camera.position.set(0, 0, 200);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(
-    window.innerWidth / 3,			// width
-    window.innerHeight / 3,			// height
+    window.innerWidth / kHackerMode,		// width
+    window.innerHeight / kHackerMode,		// height
     false					// stretch
 );
 document.body.appendChild(renderer.domElement);
@@ -23,9 +30,7 @@ var clock = new THREE.Clock();
 var materials = new Array();
 var geometries = new Array();
 var lines = new Array();
-
-var kLines = 5;
-var kVertices = 7;
+var effect = new THREE.ParallaxBarrierEffect(renderer);
 
 var makeLine = function () {
     var material = new THREE.LineBasicMaterial({
@@ -43,25 +48,29 @@ var makeLine = function () {
 
     var keyframes = [
 	new THREE.VectorKeyframeTrack(
-	    '.quaternion', [0, 1], [
-		michek.makeRandomVector(michek.origin, 4).toArray(),
-		michek.makeRandomVector(michek.origin, 4).toArray(),
-		michek.makeRandomVector(michek.origin, 4).toArray(),
-		michek.makeRandomVector(michek.origin, 4).toArray(),
+	    '.quaternion', [0, 0.5, 1, 2, 2.5, 3], [
+		michek.makeRandomVector(michek.origin, kAnimationRotation).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationRotation).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationRotation).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationRotation).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationRotation).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationRotation).toArray(),
 	    ].flat()
 	),
 	new THREE.VectorKeyframeTrack(
-	    '.position', [0, 0], [
-		michek.makeRandomVector(michek.origin, 10).toArray(),
-		michek.makeRandomVector(michek.origin, 10).toArray(),
-		michek.makeRandomVector(michek.origin, 10).toArray(),
-		michek.makeRandomVector(michek.origin, 10).toArray(),
+	    '.position', [0, 0.5, 1, 2, 2.5, 3], [
+		michek.makeRandomVector(michek.origin, kAnimationPosition).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationPosition).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationPosition).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationPosition).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationPosition).toArray(),
+		michek.makeRandomVector(michek.origin, kAnimationPosition).toArray(),
 	    ].flat()
 	)
     ];
 
     var mixer = new THREE.AnimationMixer(object);
-    var clip = new THREE.AnimationClip('rotatingLines', 1, keyframes);
+    var clip = new THREE.AnimationClip('rotatingLines', 3, keyframes);
     var action = mixer.clipAction(clip);
 
     action.loop = THREE.LoopPingPong;
@@ -92,7 +101,7 @@ var animate = function () {
 	lines[i].mixer.update(delta);
     }
 
-    renderer.render(scene, camera);
+    effect.render(scene, camera);
 };
 
 init();
