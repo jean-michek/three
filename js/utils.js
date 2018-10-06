@@ -12,18 +12,18 @@ var michek = {
 
     // Makes a kind-of random Vector around some position.
     makeRandomVector: function (center, strength) {
-	var x = Math.floor(Math.random() * strength / 2);
-	var y = Math.floor(Math.random() * strength / 2);
-	var z = Math.floor(Math.random() * strength / 2);
+	var x = Math.random() * strength / 2.0;
+	var y = Math.random() * strength / 2.0;
+	var z = Math.random() * strength / 2.0;
 
-	if (michek.makeSometimesTrue(50)) {
-	    x *= -1;
+	if (michek.makeSometimesTrue(50.0)) {
+	    x *= -1.0;
 	}
-	if (michek.makeSometimesTrue(50)) {
-	    y *= -1;
+	if (michek.makeSometimesTrue(50.0)) {
+	    y *= -1.0;
 	}
-	if (michek.makeSometimesTrue(50)) {
-	    z *= -1;
+	if (michek.makeSometimesTrue(50.0)) {
+	    z *= -1.0;
 	}
 
 	return new THREE.Vector3(x, y, z);
