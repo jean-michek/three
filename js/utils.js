@@ -34,6 +34,11 @@ var michek = {
 	return min + Math.floor(Math.random() * (max - min));
     },
 
+    // Make a random float between min and max.
+    makeRandomFloat: function (min, max) {
+	return min + Math.random() * (max - min);
+    },
+
     // Makes a random color.
     makeRandomColor: function () {
 	return Math.random() * 0xFFFFFF;
