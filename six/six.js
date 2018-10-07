@@ -15,7 +15,7 @@ var camera = new THREE.PerspectiveCamera(
     0.1,					// near
     1000					// far
 );
-camera.position.set(0, 0, 25);
+camera.position.set(0, 0, 45);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 var renderer = new THREE.WebGLRenderer({
@@ -28,6 +28,12 @@ renderer.setSize(
 );
 renderer.setClearColor(0x000000, 1);
 document.body.appendChild(renderer.domElement);
+
+var composer = new THREE.EffectComposer(renderer);
+composer.addPass( new THREE.RenderPass(scene, camera));
+var glitchPass = new THREE.GlitchPass();
+glitchPass.renderToScreen = true;
+composer.addPass(glitchPass);
 
 var clock = new THREE.Clock();
 var materials = new Array();
@@ -119,7 +125,7 @@ var animate = function () {
 	knots[i].mixer.update(delta);
     }
 
-    renderer.render(scene, camera);
+    composer.render();
 };
 
 init();
